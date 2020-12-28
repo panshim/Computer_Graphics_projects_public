@@ -1,0 +1,91 @@
+------------------------Noisify------------------------------
+Assignment1 --noisify 0 --in Images\yoda.bmp --out Images\output\noisify0.bmp
+Assignment1 --noisify .1 --in Images\yoda.bmp --out Images\output\noisify1.bmp
+Assignment1 --noisify .5 --in Images\yoda.bmp --out Images\output\noisify2.bmp
+------------------------Brighten------------------------------
+Assignment1 --brighten .5 --in Images\yoda.bmp --out Images\output\brighten0.bmp
+Assignment1 --brighten 1 --in Images\yoda.bmp --out Images\output\brighten1.bmp
+Assignment1 --brighten 2 --in Images\yoda.bmp --out Images\output\brighten2.bmp
+------------------------Gray------------------------------
+Assignment1 --gray --in Images\yoda.bmp --out  Images\output\gray.bmp
+------------------------Contrast------------------------------
+Assignment1 --contrast .5 --in Images\shrek.bmp --out  Images\output\contrast0.bmp
+Assignment1 --contrast 1 --in Images\shrek.bmp --out  Images\output\contrast1.bmp
+Assignment1 --contrast 2 --in Images\shrek.bmp --out  Images\output\contrast2.bmp
+------------------------Saturate------------------------------
+Assignment1 --saturate .5 --in Images\shrek.bmp --out  Images\output\saturation0.bmp
+Assignment1 --saturate 1 --in Images\shrek.bmp --out  Images\output\saturation1.bmp
+Assignment1 --saturate 2 --in Images\shrek.bmp --out  Images\output\saturation2.bmp
+------------------------Quantization------------------------------
+Assignment1 --quantize 1 --in Images\ramp.bmp --out  Images\output\quantization0.bmp
+Assignment1 --quantize 2 --in Images\ramp.bmp --out  Images\output\quantization1.bmp
+Assignment1 --quantize 4 --in Images\ramp.bmp --out  Images\output\quantization2.bmp
+------------------------Random Dither------------------------------
+Assignment1 --rDither 1 --in Images\ramp.bmp --out  Images\output\randomDither0.bmp
+Assignment1 --rDither 2 --in Images\ramp.bmp --out  Images\output\randomDither1.bmp
+Assignment1 --rDither 4 --in Images\ramp.bmp --out  Images\output\randomDither2.bmp
+------------------------Ordered Dither------------------------------
+Assignment1 --oDither2x2 1 --in Images\ramp.bmp --out  Images\output\orderDither0.bmp
+Assignment1 --oDither2x2 2 --in Images\ramp.bmp --out  Images\output\orderDither1.bmp
+Assignment1 --oDither2x2 4 --in Images\ramp.bmp --out  Images\output\orderDither2.bmp
+------------------------Floyd-Steinberg Dither------------------------------
+Assignment1 --fsDither 1 --in Images\ramp.bmp --out  Images\output\fsDither0.bmp
+Assignment1 --fsDither 2 --in Images\ramp.bmp --out  Images\output\fsDither1.bmp
+Assignment1 --fsDither 4 --in Images\ramp.bmp --out  Images\output\fsDither2.bmp
+------------------------Blur------------------------------
+Assignment1 --blur3x3 --in Images\sully.bmp --out  Images\output\Blur.bmp
+------------------------Edge Detection------------------------------
+Assignment1 --edges3x3 --in Images\sully.bmp --out  Images\output\Edge.bmp
+------------------------Scaling (Nearest Sample)------------------------------
+Assignment1 --scaleNearest .7 --in Images\stripe.2.bmp --out  Images\output\NearestSample0.bmp
+Assignment1 --scaleNearest 1 --in Images\stripe.2.bmp --out  Images\output\NearestSample1.bmp
+Assignment1 --scaleNearest 1.3 --in Images\stripe.2.bmp --out  Images\output\NearestSample2.bmp
+------------------------Scaling (Bilinear Sample)------------------------------
+Assignment1 --scaleBilinear .7 --in Images\stripe.2.bmp --out  Images\output\BilinearSample0.bmp
+Assignment1 --scaleBilinear 1 --in Images\stripe.2.bmp --out  Images\output\BilinearSample1.bmp
+Assignment1 --scaleBilinear 1.3 --in Images\stripe.2.bmp --out  Images\output\BilinearSample2.bmp
+------------------------Scaling (Gaussian Sample)------------------------------
+Assignment1 --scaleGaussian .7 --in Images\stripe.2.bmp --out  Images\output\GaussianSample0.bmp
+Assignment1 --scaleGaussian 1 --in Images\stripe.2.bmp --out  Images\output\GaussianSample1.bmp
+Assignment1 --scaleGaussian 1.3 --in Images\stripe.2.bmp --out  Images\output\GaussianSample2.bmp
+------------------------rotateNearest-------------------------------------
+Assignment1 --rotateNearest 30 --in Images\stripe.2.bmp --out  Images\output\rotateNearest.bmp
+------------------------rotateBilinear-------------------------------------
+Assignment1 --rotateBilinear 30 --in Images\stripe.2.bmp --out  Images\output\rotateBilinear.bmp
+------------------------rotateGaussian-------------------------------------
+Assignment1 --rotateGaussian 30 --in Images\stripe.2.bmp --out  Images\output\rotateGaussian.bmp
+------------------------funFilter-------------------------------------
+Assignment1 --fun --in Images\sully.bmp --out  Images\output\funFilter.bmp
+------------------------crop-------------------------------------
+assignment1 --crop 100 100 600 600 --in Images\yoda.bmp --out Images\output\crop.bmp
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+------------------------alphaComposite-------------------------------------
+assignment1 --in Images\panshimin.bmp --composite Images\overlay.bmp Images\douwentao.bmp --out Images\output\alphaCompo2.bmp
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+------------------------Simple Translation-------------------------------------
+assignment1 --in Images\ImageMorphing\F.bmp --bnMorph Images\ImageMorphing\F_translated.bmp Images\ImageMorphing\f_single_line_translate.txt 0.5 --out Images\output\simpleTrans.bmp
+------------------------Translation Plus Scale-------------------------------------
+assignment1 --in Images\ImageMorphing\F.bmp --bnMorph Images\ImageMorphing\F_translated_scaled.bmp Images\ImageMorphing\f_single_line_translate_scale.txt 0.5 --out Images\output\TranslationScale.bmp
+------------------------Translation Plus Rotation-------------------------------------
+assignment1 --in Images\ImageMorphing\F.bmp --bnMorph Images\ImageMorphing\F_rotated.bmp Images\ImageMorphing\f_single_line_translate_rotate.txt 0.5 --out Images\output\TranslationRotate.bmp
+------------------------MultiLine-------------------------------------
+assignment1 --in Images\ImageMorphing\F.bmp --bnMorph Images\ImageMorphing\F_scaled_2d.bmp Images\ImageMorphing\f_multi_line_scale.txt 0.5 --out Images\output\MultiLine.bmp
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+assignment1 --in span20_HTML\ImageMorphing\F.bmp --bnMorph span20_HTML\ImageMorphing\F_scaled_2d.bmp span20_HTML\ImageMorphing\f_multi_line_scale.txt 0.0 --out span20_HTML\out0.bmp
+assignment1 --in span20_HTML\ImageMorphing\F.bmp --bnMorph span20_HTML\ImageMorphing\F_scaled_2d.bmp span20_HTML\ImageMorphing\f_multi_line_scale.txt 0.1 --out span20_HTML\out1.bmp
+assignment1 --in span20_HTML\ImageMorphing\F.bmp --bnMorph span20_HTML\ImageMorphing\F_scaled_2d.bmp span20_HTML\ImageMorphing\f_multi_line_scale.txt 0.2 --out span20_HTML\out2.bmp
+assignment1 --in span20_HTML\ImageMorphing\F.bmp --bnMorph span20_HTML\ImageMorphing\F_scaled_2d.bmp span20_HTML\ImageMorphing\f_multi_line_scale.txt 0.3 --out span20_HTML\out3.bmp
+assignment1 --in span20_HTML\ImageMorphing\F.bmp --bnMorph span20_HTML\ImageMorphing\F_scaled_2d.bmp span20_HTML\ImageMorphing\f_multi_line_scale.txt 0.4 --out span20_HTML\out4.bmp
+assignment1 --in span20_HTML\ImageMorphing\F.bmp --bnMorph span20_HTML\ImageMorphing\F_scaled_2d.bmp span20_HTML\ImageMorphing\f_multi_line_scale.txt 0.5 --out span20_HTML\out5.bmp
+assignment1 --in span20_HTML\ImageMorphing\F.bmp --bnMorph span20_HTML\ImageMorphing\F_scaled_2d.bmp span20_HTML\ImageMorphing\f_multi_line_scale.txt 0.6 --out span20_HTML\out6.bmp
+assignment1 --in span20_HTML\ImageMorphing\F.bmp --bnMorph span20_HTML\ImageMorphing\F_scaled_2d.bmp span20_HTML\ImageMorphing\f_multi_line_scale.txt 0.7 --out span20_HTML\out7.bmp
+assignment1 --in span20_HTML\ImageMorphing\F.bmp --bnMorph span20_HTML\ImageMorphing\F_scaled_2d.bmp span20_HTML\ImageMorphing\f_multi_line_scale.txt 0.8 --out span20_HTML\out8.bmp
+assignment1 --in span20_HTML\ImageMorphing\F.bmp --bnMorph span20_HTML\ImageMorphing\F_scaled_2d.bmp span20_HTML\ImageMorphing\f_multi_line_scale.txt 0.9 --out span20_HTML\out9.bmp
+assignment1 --in span20_HTML\ImageMorphing\F.bmp --bnMorph span20_HTML\ImageMorphing\F_scaled_2d.bmp span20_HTML\ImageMorphing\f_multi_line_scale.txt 1.0 --out span20_HTML\out10.bmp
+

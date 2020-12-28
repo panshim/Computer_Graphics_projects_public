@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	 <meta charset="utf-8">
+	 <title>Computer Graphics Assignment4</title>
+	</head>
+	<!-- HEADING -->
+	<body>
+	 <h1>  
+	 <center>Computer Graphics Assignment4 Writeup </center>
+	 </h1>
+	<!-- Information -->
+	 <h3>
+	 <center>
+	  Name: Shimin Pan &nbsp &nbsp &nbsp &nbsp JHED: span20 &nbsp &nbsp &nbsp &nbsp Late Day: 0 &nbsp &nbsp &nbsp &nbsp 
+	  Compiler: MSVC++ 14.22 &nbsp &nbsp &nbsp &nbsp Environment: VisualStudio 2019-version 16.2 &nbsp &nbsp &nbsp &nbsp Platform: Windows10
+	 </center>
+	 </h3>
+
+	​ <p>
+	  Total implemented points: 15<br/>
+	  <br/>
+	  Fully Implemented: <br/>
+	  <ul>
+	   <li>(1) Modify the Interpolation::Sample (in Util/interpolation.todo.inl) method to support linear interpolation of the key-frame values.</li>
+	   <li>(2) Implement the operator EulerRotationParameter::operator() (in Util/geometry.todo.cpp).</li>
+	   <li>(2) Implement the code in Matrix::closestRotation (in Util/geometry.todo.inl).</li>
+	   <li>(2) Implement the operator QuaternionRotationParameter::operator() (in Util/geometry.todo.cpp).</li>
+	   <li>(2) Implement the function Matrix::Exp (in Util/geometry.todo.inl).</li>
+	   <li>(2) Modify the Interpolation::Sample (in Util/interpolation.todo.inl) method to support Catumull-Rom interpolation of the key-frame values.</li>
+	   <li>(2) Modify the Interpolation::Sample (in Util/interpolation.todo.inl) method to support uniform cubic B-spline approximation of the key-frame values.</li>
+	   <li>(2) Create a .ray file and a .key file describing an interesting animation.</li>
+	  </ul>
+	  Partially Implemented:<br/>
+	  <ul>
+	   <li>None</li>
+	  </ul>
+	  Un-implemented:<br/>
+	  <ul>
+	   <li>All those haven't been mentioned</li>
+	  </ul>
+	  Some Special Notes:<br/>
+	  <ul>
+	  <li>1. My generated .key & .ray files are in the folder: ./span20_animation <br/></li>
+	  <li>2. The .key & .ray files include: "merry_go_round.key", "merry_go_round.ray", "_woodenhorse.ray"<br/></li>
+	  <li>3. How to run the Program?<br/> 
+			&nbsp;&nbsp;&nbsp;&nbsp;Step1: build the Assignment4;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;Step2: copy the Assignment4.exe into ./span20_animation;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;Step3: open a terminal in the folder ./span20_animation;<br/></li>
+			&nbsp;&nbsp;&nbsp;&nbsp;Step4: Run commands mentioned below to generate animation for "test.ray" or "wooden_horse.ray";<br/>
+	  </ul>
+	</p>
+	<!-- ex1 -->
+	<p>
+	<hr>
+	<ul>
+	<i>Command Input: Assignment4 --in test.ray --width 500 --height 500 --cplx 100 --parameter 1 --interpolant 1<br/>
+		<br/>
+		The --parameter argument specifies how the rotations will be parameterized. Options include<br/>
+		1: Rotations are represented by 3x3 matrices, the matrices are blended, and the blended transformation (not necessarily rotation) is returned.<br/>
+		2: Rotations are represented by 3x3 matrices, the matrices are blended, and the closest rotation to the blended transformation is returned.<br/>
+		3: Rotations are represented by Euler angles, the Euler angles are blended, and the rotation described by the blended Euler angles is returned.<br/>
+		4: Rotations are represented by skew-symmetric matrices, the skey-symmetrice matrices are blended, and the exponential of the blended skew-symmetric matrix is returned.<br/>
+		5: Rotations are represented by quaternions, the quaternions are blended, and the rotation described by the normalized blended quaternion is returned.<br/>
+		<br/>
+		The --interpolant argument specifies how transformations should be blended. Options include:<br/>
+		1: Nearest point interpolation<br/>
+		2: Linear interpolation<br/>
+		3: Catmull-Rom interpolation<br/>
+		4: Uniform cubic B-spline approximation <br/></i>
+	 </li>
+	<br/>
+	 <li>
+	  <b>Test Case1: Matchman walking with different rotation representation</b><br>
+	 </li>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+	     <td><img src="./span20_HTML/matchman13.gif" width="300" height="300" /></td>
+		 <td><img src="./span20_HTML/matchman23.gif" width="300" height="300" /></td>
+		 <td><img src="./span20_HTML/matchman33.gif" width="300" height="300" /></td>
+		 <td><img src="./span20_HTML/matchman43.gif" width="300" height="300" /></td>
+		 <td><img src="./span20_HTML/matchman53.gif" width="300" height="300" /></td>
+		</tr>
+	    <tr>
+	     <td align = "CENTER"> <code> --parameter 1 --interpolant 3 <br/>3x3 matrices & Catmull-Rom interpolation</code> </td>
+		 <td align = "CENTER"> <code> --parameter 2 --interpolant 3 <br/>Closest Rotation & Catmull-Rom</code> </td>
+		 <td align = "CENTER"> <code> --parameter 3 --interpolant 3 <br/>Euler angles & Catmull-Rom interpolation</code> </td>
+		 <td align = "CENTER"> <code> --parameter 4 --interpolant 3 <br/>Skew-symmetric & Catmull-Rom</code> </td>
+		 <td align = "CENTER"> <code> --parameter 5 --interpolant 3 <br/>Quaternion & Catmull-Rom interpolation</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 <li>
+	  <b>Comments on Test Case1:</b><br>
+	 </li>
+		1. "Closest rotation matrix" will prevent legs' deformation.<br/>
+		2. Interpolate in the Euler Angle space will cause skew rotation in Cartesian Space.<br/>
+		3. Skew-symmetric and Quaternion work well.<br/>
+	  <br/>
+	  
+	  <li>
+	  <b>Test Case2: Matchman walking with different interpolant method</b><br>
+	  </li>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+	     <td><img src="./span20_HTML/matchman41.gif" width="300" height="300" /></td>
+		 <td><img src="./span20_HTML/matchman42.gif" width="300" height="300" /></td>
+		 <td><img src="./span20_HTML/matchman43.gif" width="300" height="300" /></td>
+		 <td><img src="./span20_HTML/matchman44.gif" width="300" height="300" /></td>
+		</tr>
+	    <tr>
+	     <td align = "CENTER"> <code> --parameter 4 --interpolant 1 <br/>Skew-symmetric & Nearest point</code> </td>
+		 <td align = "CENTER"> <code> --parameter 4 --interpolant 2 <br/>Skew-symmetric & Linear interpolation</code> </td>
+		 <td align = "CENTER"> <code> --parameter 4 --interpolant 3 <br/>Skew-symmetric & Catmull-Rom interpolation</code> </td>
+		 <td align = "CENTER"> <code> --parameter 4 --interpolant 4 <br/>Skew-symmetric & Uniform cubic B-spline</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 <li>
+	  <b>Comments on Test Case2:</b><br>
+	 </li>
+		1. Nearest point interpolation generates discontinuous animation.<br/>
+		2. Linear interpolation generates uniform motion/rotation.<br/>
+		3. The animation interpolated with Catmull-Rom is natural.<br/>
+		4. Uniform cubic B-spline interpolats within convex hull, so the range of moving is small.<br/>
+	 </ul>
+	</p>
+	<!-- ex2 -->
+	<hr>
+	​<p>
+	 <ul>
+	 	<i>Command Input: Assignment4 --in wooden_horse.ray --width 500 --height 500 --cplx 100 --parameter 4 --interpolant 2<br/></i>
+		<br/>
+	  <li>
+	   <b>Merry-Go-Round</b><br>
+	   <table border = "1">
+	   <tbody>
+	    <tr>
+		 <td><img src="./span20_HTML/merry_go_round.gif" width="600" height="600" />	</td>
+		</tr>
+		<tr>
+		 <td align = "CENTER"> <code> --the scene of merry-go-round</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 </li>
+	</ul>
+	 <li>
+	  Description of the merry-go-round:</br>
+	  1. Consists of 8 "wooden_horse" and "1 base, 1 pillar, 1 cover".</br>
+	  2. Wooden horses rotate around the pillar at an 'almost' constant speed while moving up and down.<br/>
+	</p>
+	 </body>
+</html>
+

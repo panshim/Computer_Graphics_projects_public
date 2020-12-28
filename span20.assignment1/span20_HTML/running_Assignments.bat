@@ -1,0 +1,1 @@
+cmd /k cd /d D:\ProfessionalTool\VisualStudio2019\VisualStudio_Project\3_JHU_file\ComputerGraphics\Assignments

@@ -1,0 +1,609 @@
+<!-- The Structure of the HTML File is referred to the Course Website "Sample results for Assignment 1: Image Processing" -->
+<!DOCTYPE html>
+<html>
+	<head>
+	 <meta charset="utf-8">
+	 <title>Computer Graphics Assignment1</title>
+	</head>
+	<!-- HEADING -->
+	<body>
+	 <h1>  
+	 <center>Computer Graphics Assignment1  Writeup </center>
+	 </h1>
+	<!-- Information -->
+	 <h3>
+	 <center>
+	  Name: Shimin Pan &nbsp &nbsp &nbsp &nbsp JHED: span20 &nbsp &nbsp &nbsp &nbsp Late Day: 0 &nbsp &nbsp &nbsp &nbsp 
+	  Compiler: MSVC++ 14.22 &nbsp &nbsp &nbsp &nbsp Environment: VisualStudio 2019-version 16.2 &nbsp &nbsp &nbsp &nbsp Platform: Windows10
+	 </center>
+	 </h3>
+
+	​ <p>
+	  Fully Implemented:<br/>
+	  <ul>
+	   <li>(1) Image32::addRandomNoise (image.todo.cpp)</li>
+	   <li>(1) Image32::brighten(image.todo.cpp)</li>
+	   <li>(1) Image32::luminance (image.todo.cpp)</li>
+	   <li>(1) Image32::contrast (image.todo.cpp)</li>
+	   <li>(1) Image32::saturate (image.todo.cpp)</li>
+	   <li>(1) Image32::crop (image.todo.cpp)</li>
+	   <li>(2) Image32::quantize (image.todo.cpp)</li>
+	   <li>(2) Image32::randomDither (image.todo.cpp)</li>
+	   <li>(2) Image32::orderedDither2x2 (image.todo.cpp)</li>
+	   <li>(2) Image32::floydSteinbergDither (image.todo.cpp)</li>
+	   <li>(2) Image32::blur3x3 (image.todo.cpp)</li>
+	   <li>(2) Image32::edgeDetect3x3 (image.todo.cpp)</li>
+	   <li>(1) Image32::nearestSample (image.todo.cpp)</li>
+	   <li>(1) Image32::bilinearSample (image.todo.cpp)</li>
+	   <li>(1) Image32::gaussianSample (image.todo.cpp)</li>
+	   <li>(1) Image32::scaleNearest (image.todo.cpp)</li>
+	   <li>(1) Image32::scaleBilinear (image.todo.cpp)</li>
+	   <li>(1) Image32::scaleGaussian (image.todo.cpp)</li>
+	   <li>(2) Image32::rotateNearest (image.todo.cpp)</li>
+	   <li>(2) Image32::rotateBilinear (image.todo.cpp)</li>
+	   <li>(2) Image32::rotateGaussian (image.todo.cpp)</li>
+	   <li>(1) Image32::setAlpha and Image32::composite (image.todo.cpp)</li>
+	   <li>(1) Create a composite image of yourself and a famous person</li>
+	   <li>(2) Image32::funFilter (image.todo.cpp)</li>
+	   <li>(6) Beier-Neely Morphing</li>
+	  </ul>
+	  Partially Implemented:<br/>
+	  <ul>
+	   <li>None</li>
+	  </ul>
+	  Un-implemented:<br/>
+	  <ul>
+	   <li>(1) Submitting one or more images for the art contests</li>
+	   <li>(1) Submitting a .mpeg or .gif movie animating the results of one or more filters with continuously varying parameters</li>
+	   <li>(2) winning the regular art contest</li>
+	  </ul>
+	  Some Important Notes 	about My Program (image.cpp has been modified. Please see the second list below):<br/>
+	<ul>
+	   <li>
+	   Path of different images:<br/>
+	   Output Images: ./span20_HTML/output<br/>
+	   Source & Overlay Images: ./span20_HTML/BasicSource<br/>
+	   10 Morphing Images: ./span20_HTML/ImageMorphing<br/>
+	   </li>
+	   
+	   <li>
+	   IMPORTANT！~~
+	   <code>Image.h; Image.cpp:</code> class Image32 has been modified by adding three methods
+	   <code>void Pixel32::updateAdd_r(int addend_r); void Pixel32::updateAdd_g(int addend_g); void Pixel32::updateAdd_b(int addend_b)</code><br/>
+	   Purpose of these three methods is to "Add/Subtract RGB Pixle values within the range [0,255);
+	   </li>
+	   
+	   <li>
+	   <code>template &lttypename T&gt T Max/Min():</code> Used to choose max/min element among several numbers in Rotation Manipulation.<br/>
+	   Using my <code>Image32::rotateNearest; Image32::rotateBilinear; Image32::rotateGaussian</code>: user can rotate a picture in arbitrary angle of [0,360°] rather than [0,90°].
+	   </li>
+	   
+	   <li>
+	   <code>Image32::funFilter:</code> Fun Filter Method (Barrel Transformation), shrink the distance(EveryPoint,origin) proportionally according to polar coordinates.
+	   </li>
+	   
+	   <li>
+	   <code>Image32::rotateGaussian; Image32::scaleGaussian:</code>choose the gaussian parameter of 
+	   <code>variance = 0.35, radius = 5</code><br/>
+	   Due to Gaussian Parameters Difference, my output Images related to Gaussian Sample might be slightly different from the sample outputs provided by professor.
+	   </li>
+	   
+	   <li>
+	   Set Alpha & Composite: the functionality has been fully implemented, although faces of Wentao Dou and Shimin Pan do not coincide.
+	   </li>
+	   
+	   <li>
+	   Beier-Neely Morphing: Pixels out of the graph range is clamped to the margin of the original graph. 
+	   </li>
+	  </ul>
+	 </p>
+	
+	<!-- Noisify -->
+	​<p>
+	<hr>
+	<ul>
+	 <li>
+	  <b>Noisify:<b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+		 <td><img src="./span20_HTML/output/noisify0.bmp" width="280" height="427.6" />	</td>
+		 <td><img src="./span20_HTML/output/noisify1.bmp" width="280" height="427.6" /> </td>
+		 <td><img src="./span20_HTML/output/noisify2.bmp" width="280" height="427.6" />	</td>
+		</tr>
+		<tr>
+		 <td align = "CENTER"> <code> --noisify 0</code> </td>
+		 <td align = "CENTER"> <code> --noisify 0.1</code> </td>
+		 <td align = "CENTER"> <code> --noisify 0.5</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 </li>
+	</ul>
+	</p>
+	<!-- Brightness	 -->
+	​<p>
+	<hr>
+	<ul>
+	 <li>
+	  <b>Brightness:<b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+		 <td> <img src="./span20_HTML/output/brighten0.bmp" width="280" height="427.6" /> </td>
+		 <td> <img src="./span20_HTML/output/brighten1.bmp" width="280" height="427.6" /> </td>
+		 <td> <img src="./span20_HTML/output/brighten2.bmp" width="280" height="427.6" /> </td>
+		</tr>
+		<tr>
+		 <td align = "CENTER"> <code> --brighten .5</code> </td>
+		 <td align = "CENTER"> <code> --brighten  1</code> </td>
+		 <td align = "CENTER"> <code> --brighten  2</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 </li>
+	</ul>
+	</p>
+	<!-- Luminance -->
+	<p>
+	<hr>
+	<ul>
+	 <li>
+	  <b>Luminance:<b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+		 <td><img src="./span20_HTML/output/gray.bmp" width="280" height="427.6" /></td>
+		</tr>
+		<tr>
+		 <td align = "CENTER"> <code> --gray</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 </li>
+	</ul>
+	</p>
+	<!-- Contrast -->
+	<p>
+	<hr>
+	<ul>
+	 <li>
+	  <b>Contrast:<b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+		 <td><img src="./span20_HTML/output/contrast0.bmp" width="466.67" height="281.33" /></td>
+		 <td><img src="./span20_HTML/output/contrast1.bmp" width="466.67" height="281.33" /></td>
+		 <td><img src="./span20_HTML/output/contrast2.bmp" width="466.67" height="281.33" /></td>
+		</tr>
+		<tr>
+		 <td align = "CENTER"> <code> --contrast .5</code> </td>
+		 <td align = "CENTER"> <code> --contrast  1</code> </td>
+		 <td align = "CENTER"> <code> --contrast  2</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 </li>
+	</ul>
+	</p>
+	<!-- Saturation -->
+	<p>
+	<hr>
+	<ul>
+	 <li>
+	  <b>Saturation:<b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+		 <td><img src="./span20_HTML/output/saturation0.bmp" width="466.67" height="281.33" /></td>
+		 <td><img src="./span20_HTML/output/saturation1.bmp" width="466.67" height="281.33" /></td>
+		 <td><img src="./span20_HTML/output/saturation2.bmp" width="466.67" height="281.33" /></td>
+		</tr>
+		<tr>
+		 <td align = "CENTER"> <code> --saturate .5</code> </td>
+		 <td align = "CENTER"> <code> --saturate  1</code> </td>
+		 <td align = "CENTER"> <code> --saturate  2</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 </li>
+	</ul>
+	</p>
+	
+	<!-- Quantization -->
+	<p>
+	<hr>
+	<ul>
+	 <li>
+	  <b>Quantization:<b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+		 <td><img src="./span20_HTML/output/quantization0.bmp" width="255" height="255" /></td>
+		 <td><img src="./span20_HTML/output/quantization1.bmp" width="255" height="255" /></td>
+		 <td><img src="./span20_HTML/output/quantization2.bmp" width="255" height="255" /></td>
+		</tr>
+		<tr>
+		 <td align = "CENTER"> <code> --quantize 1</code> </td>
+		 <td align = "CENTER"> <code> --quantize 2</code> </td>
+		 <td align = "CENTER"> <code> --quantize 4</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 </li>
+	</ul>
+	</p>
+	
+	<!-- Random Dither -->
+	<p>
+	<hr>
+	<ul>
+	 <li>
+	  <b>Random Dither:<b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+		 <td><img src="./span20_HTML/output/randomDither0.bmp" width="255" height="255" /></td>
+		 <td><img src="./span20_HTML/output/randomDither1.bmp" width="255" height="255" /></td>
+		 <td><img src="./span20_HTML/output/randomDither2.bmp" width="255" height="255" /></td>
+		</tr>
+		<tr>
+		 <td align = "CENTER"> <code> --rDither 1</code> </td>
+		 <td align = "CENTER"> <code> --rDither 2</code> </td>
+		 <td align = "CENTER"> <code> --rDither 4</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 </li>
+	</ul>
+	</p>
+	<!-- Ordered Dither -->
+	<p>
+	<hr>
+	<ul>
+	 <li>
+	  <b>Ordered Dither:<b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+		 <td><img src="./span20_HTML/output/orderDither0.bmp" width="255" height="255" /></td>
+		 <td><img src="./span20_HTML/output/orderDither1.bmp" width="255" height="255" /></td>
+		 <td><img src="./span20_HTML/output/orderDither2.bmp" width="255" height="255" /></td>
+		</tr>
+		<tr>
+		 <td align = "CENTER"> <code> --oDither2x2 1</code> </td>
+		 <td align = "CENTER"> <code> --oDither2x2 2</code> </td>
+		 <td align = "CENTER"> <code> --oDither2x2 4</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 </li>
+	</ul>
+	</p>
+	<!-- Floyd-Steinberg Dither -->
+	<p>
+	<hr>
+	<ul>
+	 <li>
+	  <b>Floyd-Steinberg Dither:<b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+		 <td><img src="./span20_HTML/output/fsDither0.bmp" width="255" height="255" /></td>
+		 <td><img src="./span20_HTML/output/fsDither1.bmp" width="255" height="255" /></td>
+		 <td><img src="./span20_HTML/output/fsDither2.bmp" width="255" height="255" /></td>
+		</tr>
+		<tr>
+		 <td align = "CENTER"> <code> --fsDither 1</code> </td>
+		 <td align = "CENTER"> <code> --fsDither 2</code> </td>
+		 <td align = "CENTER"> <code> --fsDither 4</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 </li>
+	</ul>
+	</p>
+	
+	<!-- Blurring -->
+	<p>
+	<hr>
+	<ul>
+	 <li>
+	  <b>Blurring:<b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+		 <td><img src="./span20_HTML/output/Blur.bmp" width="295" height="379" /></td>
+		</tr>
+		<tr>
+		 <td align = "CENTER"> <code> --blur3x3</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 </li>
+	</ul>
+	</p>
+
+	<!-- Edge -->
+	<p>
+	<hr>
+	<ul>
+	 <li>
+	  <b>Edge Detection:<b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+		 <td><img src="./span20_HTML/output/Edge.bmp" width="295" height="379" /></td>
+		</tr>
+		<tr>
+		 <td align = "CENTER"> <code> --Edge3x2</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 </li>
+	</ul>
+	</p>
+	
+	<!-- Scaling (Nearest Sample): -->
+	<p>
+	<hr>
+	<ul>
+	 <li>
+	  <b>Scaling (Nearest Sample):<b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+		 <td><img src="./span20_HTML/output/NearestSample0.bmp" width="140" height="140" /></td>
+		 <td><img src="./span20_HTML/output/NearestSample1.bmp" width="200" height="200" /></td>
+		 <td><img src="./span20_HTML/output/NearestSample2.bmp" width="260" height="260" /></td>
+		</tr>
+		<tr>
+		 <td align = "CENTER"> <code> --scaleNearest  .7</code> </td>
+		 <td align = "CENTER"> <code> --scaleNearest   1</code> </td>
+		 <td align = "CENTER"> <code> --scaleNearest 1.3</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 </li>
+	</ul>
+	</p>
+	
+	<!-- Scaling (Bilinear Sample): -->
+	<p>
+	<hr>
+	<ul>
+	 <li>
+	  <b>Scaling (Bilinear Sample):<b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+		 <td><img src="./span20_HTML/output/BilinearSample0.bmp" width="140" height="140" /></td>
+		 <td><img src="./span20_HTML/output/BilinearSample1.bmp" width="200" height="200" /></td>
+		 <td><img src="./span20_HTML/output/BilinearSample2.bmp" width="260" height="260" /></td>
+		</tr>
+		<tr>
+		 <td align = "CENTER"> <code> --scaleBilinear  .7</code> </td>
+		 <td align = "CENTER"> <code> --scaleBilinear   1</code> </td>
+		 <td align = "CENTER"> <code> --scaleBilinear 1.3</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 </li>
+	</ul>
+	</p>
+	
+	<!-- Scaling (Gaussian Sample): -->
+	<p>
+	<hr>
+	<ul>
+	 <li>
+	  <b>Scaling (Gaussian Sample):<b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+		 <td><img src="./span20_HTML/output/GaussianSample0.bmp" width="140" height="140" /></td>
+		 <td><img src="./span20_HTML/output/GaussianSample1.bmp" width="200" height="200" /></td>
+		 <td><img src="./span20_HTML/output/GaussianSample2.bmp" width="260" height="260" /></td>
+		</tr>
+		<tr>
+		 <td align = "CENTER"> <code> --scaleGaussian  .7</code> </td>
+		 <td align = "CENTER"> <code> --scaleGaussian   1</code> </td>
+		 <td align = "CENTER"> <code> --scaleGaussian	 1.3</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 </li>
+	</ul>
+	</p>
+	
+	<!-- Rotation: -->
+	<p>
+	<hr>
+	<ul>
+	 <li>
+	  <b>Rotation:<b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+		 <td><img src="./span20_HTML/output/rotateNearest.bmp" width="273" height="273" /></td>
+		 <td><img src="./span20_HTML/output/rotateBilinear.bmp" width="273" height="273" /></td>
+		 <td><img src="./span20_HTML/output/rotateGaussian.bmp" width="273" height="273" /></td>
+		</tr>
+		<tr>
+		 <td align = "CENTER"> <code> --rotateNearest  30</code> </td>
+		 <td align = "CENTER"> <code> --rotateBilinear 30</code> </td>
+		 <td align = "CENTER"> <code> --rotateGaussian 30</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 </li>
+	</ul>
+	</p>
+	
+	<!-- Fun Filter (Barrel Transformation): -->
+	<p>
+	<hr>
+	<ul>
+	 <li>
+	  <b>Fun Filter (Barrel Transformation):<b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+		 <td><img src="./span20_HTML/output/funFilter.bmp" width="295" height="379" /></td>
+		 <td><img src="./span20_HTML/output/funFilter1.bmp" width="300" height="300" /></td>		 
+		</tr>
+		<tr>
+		 <td align = "CENTER"> <code> --Fun Filter: Sully</code> </td>
+		 <td align = "CENTER"> <code> --Fun Filter: Stripe</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 </li>
+	</ul>
+	</p>
+	
+	<!-- crop -->
+	<p>
+	<hr>
+	<ul>
+	 <li>
+	  <b>Crop Yoda:<b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+		 <td><img src="./span20_HTML/output/yoda.bmp" width="280" height="427.6" /></td>
+		 <td><img src="./span20_HTML/output/crop.bmp" width="200" height="200" /></td>		 
+		</tr>
+		<tr>
+		 <td align = "CENTER"> <code> --Original Yoda</code> </td>
+		 <td align = "CENTER"> <code> --Crop Yoda</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 </li>
+	</ul>
+	</p>
+	
+	<!-- Set Alpha & Composite -->
+	<p>
+	<hr>
+	<ul>
+	 <li>
+	  <b>Set Alpha & Composite<b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+		 <td><img src="./span20_HTML/output/douwentao.bmp" width="360" height="360" /></td>
+		 <td><img src="./span20_HTML/output/panshimin.bmp" width="360" height="360" /></td>
+		 <td><img src="./span20_HTML/output/alphaCompo.bmp" width="360" height="360" /></td>
+		 
+		</tr>
+		<tr>
+		 <td align = "CENTER"> <code> Wentao Dou</code> </td>
+		 <td align = "CENTER"> <code> Shimin Pan</code> </td>
+		 <td align = "CENTER"> <code> Composite</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 </li>
+	</ul>
+	</p>
+	
+	<!-- Beier-Neely Morphing: -->
+	<p>
+	<hr>
+	<ul>
+	 <li>
+	  <b>Test Case 1: Simple Translation<b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+		 <td><img src="./span20_HTML/output/F1.jpg" width="300" height="300" /></td>
+		 <td><img src="./span20_HTML/output/F2.jpg" width="300" height="300" /></td>
+		 <td><img src="./span20_HTML/output/simpleTrans.bmp" width="300" height="300" /></td>
+		</tr>
+		<tr>
+		 <td align = "CENTER"> <code> Origin_1</code> </td>
+		 <td align = "CENTER"> <code> Origin_2</code> </td>
+		 <td align = "CENTER"> <code> Simple Translation</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 </li>
+	 <br>
+	 <li>
+	  <b>Test Case 2: Translation Plus Scale<b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+		 <td><img src="./span20_HTML/output/F3.jpg" width="300" height="300" /></td>
+		 <td><img src="./span20_HTML/output/F4.jpg" width="300" height="300" /></td>
+		 <td><img src="./span20_HTML/output/TranslationScale.bmp" width="300" height="300" /></td>
+		 
+		</tr>
+		<tr>
+		 <td align = "CENTER"> <code> Origin_1</code> </td>
+		 <td align = "CENTER"> <code> Origin_2</code> </td>
+		 <td align = "CENTER"> <code> Translation Plus Scale</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 </li>
+	 <br>
+	 <li>
+	  <b>Test Case 3: Translation Plus Rotation<b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+		 <td><img src="./span20_HTML/output/F5.jpg" width="300" height="300" /></td>
+		 <td><img src="./span20_HTML/output/F6.jpg" width="300" height="300" /></td>
+		 <td><img src="./span20_HTML/output/TranslationRotate.bmp" width="300" height="300" /></td>
+		</tr>
+		<tr>
+		 <td align = "CENTER"> <code> Origin_1</code> </td>
+		 <td align = "CENTER"> <code> Origin_2</code> </td>
+		 <td align = "CENTER"> <code> Translation Plus Rotation</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 </li>
+	 <br>
+	 <li>
+	  <b>Test Case 4: MultiLine<b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+		 <td><img src="./span20_HTML/output/F7.jpg" width="300" height="300" /></td>
+		 <td><img src="./span20_HTML/output/F8.jpg" width="300" height="300" /></td>
+		 <td><img src="./span20_HTML/output/MultiLine.bmp" width="300" height="300" /></td>
+		</tr>
+		<tr>
+		 <td align = "CENTER"> <code> Origin_1</code> </td>
+		 <td align = "CENTER"> <code> Origin_2</code> </td>
+		 <td align = "CENTER"> <code> MultiLine</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 </li>
+	 <br/>
+	 <li>
+	  <b>Animation of Morphing<b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+	     <td><img src="./span20_HTML/output/10morphing.gif" width="300" height="300" /></td>
+	    </tr>
+	    <tr>
+	     <td align = "CENTER"> <code> Animation</code> </td>
+	    </tr>
+	   </tbody>
+	  </table>
+	  10 morphing pictures are in the dir ./span20_HTML/output/10 Morphing
+	 </li>
+	</ul>
+	
+	
+	
+	 </body>
+</html>
+

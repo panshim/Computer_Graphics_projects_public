@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	 <meta charset="utf-8">
+	 <title>Computer Graphics Assignment2</title>
+	</head>
+	<!-- HEADING -->
+	<body>
+	 <h1>  
+	 <center>Computer Graphics Assignment2  Writeup </center>
+	 </h1>
+	<!-- Information -->
+	 <h3>
+	 <center>
+	  Name: Shimin Pan &nbsp &nbsp &nbsp &nbsp JHED: span20 &nbsp &nbsp &nbsp &nbsp Late Day: 0 &nbsp &nbsp &nbsp &nbsp 
+	  Compiler: MSVC++ 14.22 &nbsp &nbsp &nbsp &nbsp Environment: VisualStudio 2019-version 16.2 &nbsp &nbsp &nbsp &nbsp Platform: Windows10
+	 </center>
+	 </h3>
+
+	​ <p>
+	  Fully Implemented: <br/>
+	  Total points:<b> 30</b>
+	  <ul>
+	   <li>(1) Ray::Camera::getRay (Ray/camera.todo.cpp)</li>
+	   <li>(2) Ray::ShapeList::intersect (Ray/shapeList.todo.cpp)</li>
+	   <li>(2) Ray::Sphere::intersect (Ray/sphere.todo.cpp)</li>
+	   <li>(2) Ray::TriangleList::intersect (Ray/shapeList.todo.cpp) and Ray::Triangle::intersect (Ray/triangle.todo.cpp)</li>
+	   <li>(1) Ray::Scene::getColor (Ray/scene.todo.cpp)</li>
+	   <li>(2) To obtain the ambient and diffuse color contributions of the lights at the point of intersection</li>
+	   <li>(2) To obtain the specular color contribution of the lights at the point of intersection</li>
+	   <li>(2) To determine if the point of intersection is in shadow from a particular light source</li>
+	   <li>(1) Ray::Scene::getColor (Ray/scene.todo.cpp)</li>
+	   <li>(2) Ray::AffineShape::intersect (Ray/shapeList.todo.cpp)</li>
+	   <li>(1) Ray::Scene::getColor (Ray/scene.todo.cpp)</li>
+	   <li>(1) Ray::Scene::getColor (Ray/scene.todo.cpp)</li>
+	   <li>(2) Ray::Scene::getColor (Ray/scene.todo.cpp)</li>
+	   <li>(2) Ray::Scene::getColor (Ray/scene.todo.cpp)</li>
+	   <li>Accelerated Ray-Tracing</li>
+			&emsp;(3) Accelerate ray intersection tests with hierarchical bounding boxes<br/>
+			&emsp;(2) Ray::ShapeList::intersect (Ray/shapeList.todo.cpp) Modify this method
+	   <li>(2) Ray::Triangle::intersect (Ray/triangle.todo.cpp)</li>
+	  </ul>
+	  Partially Implemented: (have not test yet)<br/>
+	  <ul>
+	   <li>(1) Ray::Box::intersect and Ray::Box::updateBoundingBox (Ray/box.todo.cpp)</li>
+	  </ul>
+	  Un-implemented:<br/>
+	  <ul>
+	   <li>(1) Implement a jittered supersampling scheme to reduce aliasing by casting multiple rays per pixel, randomly jittered about pixel centers, and averaging the radiance samples.</li>
+	   <li>(1) Generate a 3D scene and save it as a .ray file.</li>
+	   <li>(1) Treat Ray::PointLights and Ray::SpotLights lights as having a finite 'area' and cast a collection of rays during shadow checking to generate soft shadows.</li>
+	   <li>(1) Ray::Cylinder::intersect and Ray::Cylinder::updateBoundingBox (Ray/cylinder.todo.cpp)</li>
+	   <li>(1) Ray::Cone::intersect and Ray::Cone::updateBoundingBox (Ray/cone.todo.cpp)</li>
+	   <li>(2) Ray::Torus::intersect and Ray::Torus::updateBoundingBox (Ray/torus.todo.cpp)</li>
+	   <li>(3) Constructive solid geometry</li>
+	   <li>(2) Implement procedural texture mapping with Perlin noise functions to create 3-D solid wood, marble, etc.</li>
+	   <li>(1) Implement bump mapping for either or both texturing schemes.
+	   <li>(1) Simulate the behavior of a real camera lens by implementing the procedure in this SIGGRAPH paper.</li>
+	   <li>(2) Accelerate ray intersections with an octree or BSP spatial data structure.</li>
+	   <li>(?) Impress us with something we hadn't considered...</li></li>
+	  </ul>
+	 </p>
+	Some Special Notes:<br>
+	(1) In BoundingBox::intersect & Ray::Box::intersect, I employ the algorithm described in "An Efficient and Robust Ray–Box Intersection Algorithm", Amy Williams, et al. University of Utah.<br>
+	(2) For 'dog.ray' and 'dragon.ray', there might be a slight special case I haven't considered, because part of the model goes dark.<br>
+	(3) It's truly a brutal assignment. So much debugging work.<br>
+	(4) Command/Parameter: "Assignment2 --in test.ray --out test.bmp --width 500 --height 500 --rLimit 5 --cutOff 0.0001" ; if use another .ray file, just change the input file name (e.g. --in dragon.ray)
+	<!-- ex1 -->
+	​<p>
+	<hr>
+	<ul>
+	 <li>
+	  <b>Sphere & Triangle:<b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+		 <td><img src="./span20_HTML/test_0_sphere.bmp" width="300" height="300" />	</td>
+		 <td><img src="./span20_HTML/test_1_triangle.bmp" width="300" height="300" />	</td>
+		</tr>
+		<tr>
+		 <td align = "CENTER"> <code> --sphere</code> </td>
+		 <td align = "CENTER"> <code> --triangle</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 </li>
+	</ul>
+	</p>
+	<!-- ex2 -->
+	<p>
+	<ul>
+	 <li>
+	  <b>Diffusive & Specular & Shadow <b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+		 <td><img src="./span20_HTML/test_3_diffusive.bmp" width="300" height="300" /></td>
+		 <td><img src="./span20_HTML/test_4_specular.bmp" width="300" height="300" /></td>
+		 <td><img src="./span20_HTML/test_5_Shadow.bmp" width="300" height="300" /></td>
+		</tr>
+		<tr>
+		 <td align = "CENTER"> <code> diffusive</code> </td>
+		 <td align = "CENTER"> <code> specular</code> </td>
+		 <td align = "CENTER"> <code> Shadow</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 </li>
+	 <br>
+	<!-- ex3 -->
+	<li>
+	  <b>Texture <b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+	     <td><img src="./span20_HTML/test_6_affine.bmp" width="300" height="300" /></td>
+		 <td><img src="./span20_HTML/test_7_refle.bmp" width="300" height="300" /></td>
+		 <td><img src="./span20_HTML/test_8_refl_refra.bmp" width="300" height="300" /></td>
+		 <td><img src="./span20_HTML/test_9_refl_refra_trans.bmp" width="300" height="300" /></td>
+	    </tr>
+	    <tr>
+	     <td align = "CENTER"> <code> Affine</code> </td>
+		 <td align = "CENTER"> <code> Reflect</code> </td>
+		 <td align = "CENTER"> <code> Refract</code> </td>
+		 <td align = "CENTER"> <code> Transparent</code> </td>
+	    </tr>
+	   </tbody>
+	  </table>
+	 </li>
+	 <!-- ex4 Texture -->
+	 <li>
+	  <b>Affine & Reflect & Refract & Transparent <b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+	     <td><img src="./span20_HTML/test_10_texture.bmp" width="300" height="300" /></td>
+	    </tr>
+	    <tr>
+	     <td align = "CENTER"> <code> Texture</code> </td>
+	    </tr>
+	   </tbody>
+	  </table>
+	 </li>
+	<!-- ex5 PointLight & SpotLight -->
+	 <li>
+	  <b>PointLight & SpotLight <b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+	     <td><img src="./span20_HTML/test_17_point.bmp" width="300" height="300" /></td>
+		 <td><img src="./span20_HTML/test_18_spot.bmp" width="300" height="300" /></td>
+	    </tr>
+	    <tr>
+	     <td align = "CENTER"> <code> Point</code> </td>
+		 <td align = "CENTER"> <code> Spot</code> </td>
+	    </tr>
+	   </tbody>
+	  </table>
+	 </li>
+	 <!-- ex6 Bunny & Buddha & Big & David -->
+	 <li>
+	  <b>Bunny & Buddha & Big & David <b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+	     <td><img src="./span20_HTML/test_12_bunny.bmp" width="300" height="300" /></td>
+		 <td><img src="./span20_HTML/test_13_buddha.bmp" width="300" height="300" /></td>
+		 <td><img src="./span20_HTML/test_14_big.bmp" width="300" height="300" /></td>
+		 <td><img src="./span20_HTML/test_16_david.bmp" width="300" height="300" /></td>
+	    </tr>
+	    <tr>
+	     <td align = "CENTER"> <code> Bunny</code> </td>
+		 <td align = "CENTER"> <code> Buddha</code> </td>
+		 <td align = "CENTER"> <code> Big</code> </td>
+		 <td align = "CENTER"> <code> David</code> </td>
+	    </tr>
+	   </tbody>
+	  </table>
+	 </li>
+	 <li>
+	  <b>Flawed Dog & Dragon <b/><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+	     <td><img src="./span20_HTML/dog_flaw.bmp" width="300" height="300" /></td>
+		 <td><img src="./span20_HTML/flaw_dragon.bmp" width="300" height="300" /></td>
+	    </tr>
+	    <tr>
+	     <td align = "CENTER"> <code> Flawed Dog</code> </td>
+		 <td align = "CENTER"> <code> Flawed Dragon</code> </td>
+	    </tr>
+	   </tbody>
+	  </table>
+	 </li>
+	</ul>
+	
+	
+	 </body>
+</html>
+

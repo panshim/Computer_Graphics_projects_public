@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	 <meta charset="utf-8">
+	 <title>Computer Graphics Assignment3</title>
+	</head>
+	<!-- HEADING -->
+	<body>
+	 <h1>  
+	 <center>Computer Graphics Assignment3 Writeup </center>
+	 </h1>
+	<!-- Information -->
+	 <h3>
+	 <center>
+	  Name: Shimin Pan &nbsp &nbsp &nbsp &nbsp JHED: span20 &nbsp &nbsp &nbsp &nbsp Late Day: 0 &nbsp &nbsp &nbsp &nbsp 
+	  Compiler: MSVC++ 14.22 &nbsp &nbsp &nbsp &nbsp Environment: VisualStudio 2019-version 16.2 &nbsp &nbsp &nbsp &nbsp Platform: Windows10
+	 </center>
+	 </h3>
+
+	​ <p>
+	  Total implemented points: 38<br/>
+	  <br/>
+	  Fully Implemented: <br/>
+	  <ul>
+	   <li>(1) Implement the Ray::Camera::drawOpenGL (in Ray/camera.todo.cpp) </li>
+	   <li>(1) Implement the Ray::ShapeList::drawOpenGL (in Ray/shapeList.todo.cpp) </li>
+	   <li>(2) Implement the Ray::TriangleList::drawOpenGl (in Ray/shapeList.todo.cpp) and Ray::Triangle::drawOpenGL (in Ray/triangle.todo.cpp) </li>
+	   <li>(2) Implement the Ray::Sphere::drawOpenGL (in Ray/sphere.todo.cpp) </li>
+	   <li>(2) Impelement the Ray::Material::drawOpenGL (in Ray/scene.todo.cpp)</li>
+	   <li>(3) To draw the light sources, implement:</li>
+			&emsp; Ray::DirectionalLight::drawOpenGL (in Ray/directionalLight.todo.cpp)<br/>
+			&emsp; Ray::PointLight::drawOpenGL (in Ray/pointLight.todo.cpp);<br/>
+			&emsp; Ray::SpotLight::drawOpenGL (in Ray/spotLight.todo.cpp)<br/>
+	   <li>(2) Modify the implementation of Ray::AffineShape::drawOpenGL (in Ray/shapeList.todo.cpp)</li>
+	   <li>(3) Implement triangle texture mapping.</li>
+			&emsp; Modify the implementation of Ray::Triangle::drawOpenGL (in Ray/triangle.todo.cpp) to specify the texture coordinates prior to specifying the vertex positions.<br/>
+			&emsp; Modify the implementation of Ray::Material::drawOpenGL (in Ray/scene.todo.cpp) method to enable and bind the texture if it is present.<br/>
+			&emsp; Modify the implementation of Ray::Texture::initOpenGL (in Ray/scene.todo.cpp) method to generate the texture handle.<br/>
+	   <li>(1) Implement the Ray::Box::drawOpenGL (in Ray/box.todo.cpp) </li>
+	   <li>(1) Implement the Ray::Cylinder::drawOpenGL (in Ray/cylinder.todo.cpp)</li>
+	   <li>(1) Implement the Ray::Cone::drawOpenGL (in Ray/cone.todo.cpp) </li>
+	   <li>(1) Implement the Ray::Torus::drawOpenGL (in Ray/torus.todo.cpp) </li>
+	   <li>(1) Implement mouse control to facilitate translating the camera about the scene. </li>
+			&emsp; Ray::Camera::moveForward (in Ray/camera.todo.cpp)<br/>
+			&emsp; Ray::Camera::moveRight (in Ray/camera.todo.cpp)<br/>
+			&emsp; Ray::Camera::moveUp (in Ray/camera.todo.cpp)<br/>
+	   <li>(2) Implement mouse control to facilitate rotating around the scene scene.</li>
+			&emsp; Ray::Camera::rotateUp (in Ray/camera.todo.cpp)<br/>
+			&emsp; Ray::Camera::rotateRight (in Ray/camera.todo.cpp)<br/>
+	   <li>(2) Implement full scene anti-aliasing using the accumulation buffer.</li>
+	   <li>Generate a .ray file describing a room scene with:</li> 
+			&emsp; (1) Four walls, a floor and ceiling. <br/>
+			&emsp; (3) A table, several chairs, etc. <br/>
+			&emsp; (1) At least one transparent surface (the table top). <br/>
+			&emsp; (1) At least three texture mapped surfaces, each with a different texture. <br/>
+			&emsp; (1) At least three point or spot light sources. <br/>
+	   <li>Support efficient rendering using vertex buffer objects. </li>
+			&emsp; (2) To implement the Ray::TriangleList::initOpenGL <br/>
+			&emsp; (1) Implement vertex buffer objects for Ray::Sphere.<br/>
+			&emsp; (1) Implement vertex buffer objects for Ray::Cylinder.<br/>
+			&emsp; (1) Implement vertex buffer objects for Ray::Cone.<br/>
+			&emsp; (1) Implement vertex buffer objects for Ray::Torus.<br/>
+	  </ul>
+	  Partially Implemented:<br/>
+	  <ul>
+	   <li>None</li>
+	  </ul>
+	  Un-implemented:<br/>
+	<ul>
+	   <li>All those haven't been mentioned</li>
+	</ul>
+	</p>
+	<!-- ex1 Bunny & Buddha & Big & David -->
+	<p>
+	<hr>
+	<ul>
+	<i>Command Input: Assignment3 --in test.ray --width 500 --height 500 --cplx 100<br/></i>
+	<br/>
+	 <li>
+	  <b>test case: sphere and square </b><br>
+	  <table border = "1">
+	   <tbody>
+	    <tr>
+	     <td><img src="./span20_HTML/test.bmp" width="400" height="400" /></td>
+		</tr>
+	    <tr>
+	     <td align = "CENTER"> <code> test case</code> </td>
+	    </tr>
+	   </tbody>
+	  </table>
+	 </li>
+	</ul>
+	</p>
+	<li>
+	  Some Special Notes:<br>
+	  1. Ray::Cylinder/Cone/Torus::drawOpenGL are implemented directly through VBO & EBO. Maybe I can get both points of Non VBO/VBO implementation?<br/>
+	  2. Ray::Sphere::drawOpenGL has 'Non VBO' & 'VBO' version. (The VBO version has been commented out).
+	  3. Both VBO and EBO are used. But not VAO.
+	 </li>
+	<!-- ex2 -->
+	<hr>
+	​<p>
+	 <ul>
+	 	<i>Command Input: Assignment3 --in span20RoomScene.ray --width 500 --height 500 --cplx 100<br/></i>
+		<br/>
+	  <li>
+	   <b>Sphere & Triangle:</b><br>
+	   <table border = "1">
+	   <tbody>
+	    <tr>
+		 <td><img src="./span20_HTML/homescene.bmp" width="650" height="650" />	</td>
+		</tr>
+		<tr>
+		 <td align = "CENTER"> <code> --the scene generate by me</code> </td>
+		</tr>
+	   </tbody>
+	  </table>
+	 </li>
+	</ul>
+	 <li>
+	  Description of span20RoomScene:</br>
+	  1. Light: 1 directional light; 2 point lights(wall light & ceiling lamp in the scene: lamp-chimneys are half-transparent); 1 spot light (lamp on the table)</br>
+	  2. Furnitures: 2 chairs; 1 table; 1 lamp</br>
+	  3. Textures: wood floor; wall paper; window & curtain</br>
+	  4. Room Size: 4m x 3m x 2m</br>
+	  5. The lamp cannot move as required as 'Luxo Jr. style' (The support has 2 segments though);
+	 </li>
+	 <br/>
+	 <li>
+	  Some Special Notes:<br>
+	  1. 'In void Material::drawOpenGL', I implemented codes for 'transparent & non transparent' Version. <br/>
+	  &emsp; If you want to generate scene for test.ray, 'non transparent' version will give you a normal one; 'transparent' version will give you a darker one.<br/>
+	  &emsp; If you want to generate scene for span20RoomScene.ray, then better to use 'transparent' one. (to see the transparent desk top)<br/>
+	  2. The .ray file is written by hand. I haven't find a way to generate it automatically.
+	 </li>
+	</p>
+	 </body>
+</html>
+
